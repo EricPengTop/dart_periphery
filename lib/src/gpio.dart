@@ -466,10 +466,10 @@ class GPIO {
   ///
   /// Use [GPIO.setBaseGPIOpath] to change the default character device path.
   GPIO(this.line, this.direction, [this.chip = 0])
-      : path = _gpioBasePath + chip.toString(),
+      : path = _gpioBasePath + chip == -1 ? '' : chip.toString(),
         name = '',
         _gpioHandle =
-            _openGPIO(_gpioBasePath + chip.toString(), line, direction);
+            _openGPIO(_gpioBasePath + chip == -1 ? '' : chip.toString(), line, direction);
 
   static Pointer<Void> _openGPIO(
       String path, int line, GPIOdirection direction) {
@@ -486,10 +486,10 @@ class GPIO {
   /// device GPIO with the [chip] number. The default chip number is 0, with the path /dev/gpiochip0. Use [GPIO.setBaseGPIOpath]
   /// to change the default character device path.
   GPIO.name(this.name, this.direction, [this.chip = 0])
-      : path = _gpioBasePath + chip.toString(),
+      : path = _gpioBasePath + chip == -1 ? '' : chip.toString(),
         line = -1,
         _gpioHandle =
-            _openNameGPIO(_gpioBasePath + chip.toString(), name, direction);
+            _openNameGPIO(_gpioBasePath + chip == -1 ? '' : chip.toString(), name, direction);
 
   static Pointer<Void> _openNameGPIO(
       String path, String name, GPIOdirection direction) {
@@ -506,11 +506,11 @@ class GPIO {
   /// device GPIO with the [chip] number. The default chip numer is 0, with the path /dev/gpiochip0. Use [GPIO.setBaseGPIOpath]
   /// to change the default character device path.
   GPIO.advanced(this.line, GPIOconfig config, [this.chip = 0])
-      : path = _gpioBasePath + chip.toString(),
+      : path = _gpioBasePath + chip == -1 ? '' : chip.toString(),
         name = '',
         direction = config.direction,
         _gpioHandle =
-            _openAdvancedGPIO(_gpioBasePath + chip.toString(), line, config);
+            _openAdvancedGPIO(_gpioBasePath + chip == -1 ? '' : chip.toString(), line, config);
 
   static Pointer<Void> _openAdvancedGPIO(
       String path, int line, GPIOconfig config) {
@@ -527,11 +527,11 @@ class GPIO {
   /// device GPIO with the [chip] number. The default chip numer is 0, with the path <tt>/dev/gpiochip0</tt>. Use [GPIO.setBaseGPIOpath]
   /// to change the default character device path.
   GPIO.nameAdvanced(this.name, GPIOconfig config, [this.chip = 0])
-      : path = _gpioBasePath + chip.toString(),
+      : path = _gpioBasePath + chip == -1 ? '' : chip.toString(),
         line = -1,
         direction = config.direction,
         _gpioHandle = _openNameAdvancedGPIO(
-            _gpioBasePath + chip.toString(), name, config);
+            _gpioBasePath + chip == -1 ? '' : chip.toString(), name, config);
 
   static Pointer<Void> _openNameAdvancedGPIO(
       String path, String name, GPIOconfig config) {
