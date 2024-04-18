@@ -171,7 +171,7 @@ DynamicLibrary loadPeripheryLib() {
   if (_isPeripheryLibLoaded) {
     return _peripheryLib;
   }
-  if (!Platform.isLinux) {
+  if (!Platform.isLinux || !Platform.isAndroid || !Platform.isIOS || !Platform.isMacOS || !Platform.isWindows) {
     throw PlatformException('dart_periphery is only supported for Linux!');
   }
 
